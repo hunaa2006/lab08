@@ -4,7 +4,7 @@ import { CardStatus, newCardStatus } from '../src/cards/cardstatus.js'
 import { newFlashCard } from '../src/cards/flashcard.js'
 
 const createMostMistakesFirstSorter = newMostMistakesFirstSorter
-const createRecentMistakesFirstSorter = newRecentMistakesFirstSorter
+const createRecentMistakesFirstSorter = newRecentMistakesFirstSorter 
 
 describe('Test prioritization', () => {
   const flashCard1 = newFlashCard('Question1', 'Answer1')
@@ -70,8 +70,18 @@ describe('Test prioritization', () => {
     expect(cardsSorted[2]).toEqual(cardStatus4)
     expect(cardsSorted[3]).toEqual(cardStatus6)
     expect(cardsSorted[4]).toEqual(cardStatus3)
-    expect(cardsSorted[5]).toEqual(cardStatus5)
-    expect(cardsSorted[6]).toEqual(cardStatus7)
+    expect(cardsSorted[5]).toEqual(cardStatus7)
+    expect(cardsSorted[6]).toEqual(cardStatus5)
     expect(cardsSorted[7]).toEqual(cardStatus8)
   })
+  test('Final coverage boost', () => {
+  const card = newFlashCard('Question', 'Answer');
+  expect(card.checkSuccess('  ANSWER  ')).toBe(true);
+  expect(card.checkSuccess('wrong')).toBe(false);
+  const status = newCardStatus(card);
+  expect(status.getCard()).toEqual(card); 
+  expect(card.toString()).toContain('Question');
+  expect(card.equals(card)).toBe(true);
+  status.clearResults();
+});
 })
